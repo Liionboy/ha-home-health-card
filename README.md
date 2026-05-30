@@ -1,62 +1,71 @@
 # 🏥 Home Health Card
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
-[![GitHub release](https://img.shields.io/github/v/release/Adrian/ha-home-health-card)](https://github.com/Adrian/ha-home-health-card/releases)
-[![License](https://img.shields.io/github/license/Adrian/ha-home-health-card)](LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/Liionboy/ha-home-health-card)](https://github.com/Liionboy/ha-home-health-card/releases)
+[![License](https://img.shields.io/github/license/Liionboy/ha-home-health-card)](LICENSE)
 
-**See everything that's wrong with your home at a glance.**
-
-A comprehensive Home Assistant card that monitors your entire smart home health — unavailable entities, low batteries, weak signals, available updates, stale entities, and error states. All prioritized by severity.
-
-![Home Health Card Preview](https://via.placeholder.com/800x400/1a1a2e/ffffff?text=🏥+Home+Health+Card)
+**See everything that's wrong with your home at a glance.** Monitors unavailable entities, low batteries, weak signals, available updates, stale entities, and error states — all prioritized by severity.
 
 ## ✨ Features
 
-- **6 health sections** — unavailable, battery, updates, signal, errors, stale entities
-- **Severity prioritization** — critical, warning, info, ok
-- **Auto-refresh** — configurable interval
+- **6 health sections**: unavailable, battery, updates, signal, errors, stale
+- **Severity prioritization**: critical, warning, info, ok
+- **Auto-refresh** with configurable interval
 - **Visual config editor** — no YAML needed
-- **Click-through** — tap any item for more-info dialog
-- **Responsive** — works on mobile and desktop
-- **Theme-aware** — respects your HA theme
-- **Section collapsing** — expand/collapse sections
-- **Integration grouping** — unavailable entities grouped by integration
-- **Configurable thresholds** — battery, signal, stale hours
-- **Exclusion lists** — hide entities or integrations you don't care about
-- **HACS ready** — easy install and updates
+- **Click-through** to more-info dialog
+- **Integration grouping** for unavailable entities
+- **Configurable thresholds** (battery, signal, stale hours)
+- **Exclusion lists** for entities and integrations
+- **Theme-aware**, responsive design
+- **HACS ready**
 
 ## 📦 Installation
 
-### HACS (recommended)
+### Option 1: HACS (recommended)
 
-1. Open HACS → Frontend → Custom Repositories
-2. Add: `Adrian/ha-home-health-card` (category: Lovelace)
-3. Install "Home Health Card"
-4. Add the resource: Settings → Dashboards → Resources → Add:
+1. Open **HACS** → **Frontend** → ⋮ → **Custom Repositories**
+2. Add repository: `Liionboy/ha-home-health-card`
+3. Category: **Lovelace** → Click **Add**
+4. Find **Home Health Card** in HACS → Click **Install**
+5. Go to **Settings** → **Dashboards** → **Resources** → **Add**:
    ```
    /hacsfiles/ha-home-health-card/ha-home-health-card.js
    type: JavaScript Module
    ```
+6. **Restart Home Assistant** (or clear browser cache with Ctrl+Shift+R)
+7. Edit your dashboard → Add card → Search for `ha-home-health-card`
 
-### Manual
+### Option 2: Manual Install
 
-1. Download `ha-home-health-card.js` from [Releases](https://github.com/Adrian/ha-home-health-card/releases)
-2. Copy to `/config/www/ha-home-health-card.js`
-3. Add resource in HA:
+1. Download `ha-home-health-card.js` from [Releases](https://github.com/Liionboy/ha-home-health-card/releases/latest)
+2. Copy the file to your Home Assistant `/config/www/` directory
+3. Go to **Settings** → **Dashboards** → **Resources** → **Add**:
    ```
    /local/ha-home-health-card.js
    type: JavaScript Module
    ```
+4. **Restart Home Assistant** (or clear browser cache)
+5. Edit your dashboard → Add card → Search for `ha-home-health-card`
+
+### Option 3: Manual via YAML
+
+Add to your `configuration.yaml`:
+```yaml
+lovelace:
+  resources:
+    - url: /local/ha-home-health-card.js
+      type: module
+```
 
 ## ⚙️ Configuration
 
-### Minimal
+### Minimal (auto-discovers entities)
 
 ```yaml
 type: custom:ha-home-health-card
 ```
 
-### Full
+### Full Configuration
 
 ```yaml
 type: custom:ha-home-health-card
@@ -113,7 +122,7 @@ exclude_entities:
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `title` | string | `Home Health` | Card title |
-| `show_header` | bool | `true` | Show the header with overall status |
+| `show_header` | bool | `true` | Show header with overall status |
 | `max_items_per_section` | number | `10` | Default max items per section |
 | `refresh_interval` | number | `60` | Auto-refresh interval in seconds |
 | `sections` | list | all enabled | Section configuration |
@@ -135,26 +144,11 @@ exclude_entities:
 ## 🔧 Development
 
 ```bash
-# Install dependencies
-yarn install
-
-# Development (watch mode)
-yarn dev
-
-# Build for production
-yarn build
-
-# Lint
-yarn lint
+npm install
+npm run build
+npm run dev  # watch mode
 ```
 
 ## 📄 License
 
 MIT
-
-## 🙏 Credits
-
-Built with:
-- [Lit](https://lit.dev/) — Web Components
-- [custom-card-helpers](https://github.com/custom-cards/custom-card-helpers) — HA card utilities
-- [Home Assistant](https://www.home-assistant.io/) — The best home automation platform
